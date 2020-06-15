@@ -45,3 +45,25 @@ knn_predict <- function(test_data, train_data, k_value){
   return(pred) #return pred vector
 }
 
+#Accuracy Calculation in R
+
+#The accuracy metric calculates the ratio of the number of correctly predicted class labels to the total number of predicted labels.
+
+accuracy <- function(test_data){
+  correct = 0
+  for(i in c(1:nrow(test_data))){
+    if(test_data[i,6] == test_data[i,7]){ 
+      correct = correct+1
+    }
+  }
+  accu = correct/nrow(test_data) * 100  
+  return(accu)
+}
+
+
+#############################
+K = 5
+predictions <- knn_predict(test.df, train.df, K) #calling knn_predict()
+ 
+test.df[,7] <- predictions #Adding predictions in test data as 7th column
+print(accuracy(test.df))
